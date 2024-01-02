@@ -26,13 +26,22 @@ const SignIn = () => {
       try{
         
         if (email !== '' && password !== '') {
-          const data = { email, password }; // Combine username and password into an object
+          const data = { email, password }; 
           console.log(data, 'data');
 
           let response=await axios.post('http://localhost:5000/login',data)
           console.log(response,'response');
           console.log('token',response.data.token);
 
+          if(response.data.admin){
+            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('loggedInUsername', response.data.username);
+            localStorage.setItem('userId',response.data.id)
+            console.log('token: ',response.data.token);
+            alert('welcome admin')
+            navigate('/homeadmin')
+            return
+          }
 
           if(response.data.status){
             localStorage.setItem('token', response.data.token)
@@ -40,18 +49,18 @@ const SignIn = () => {
             localStorage.setItem('userId',response.data.id)
             console.log(response.data.id,'userId');
             console.log(response.data.username,'loggedInUsername');
-            console.log('success');
+            console.log('login success');
             alert('Login Success')
             navigate('/profile')
           }
           else{
-            console.log('failed');
+            console.log('login failed');
             alert('incorrect email or password')
           }
 
         }
         else if(email === ''){
-          alert('email is Required')
+          alert('Email is Required')
         }else{
           alert('Password is required')
         }
@@ -70,7 +79,7 @@ const SignIn = () => {
         <label htmlFor="email">Email</label>
         <input className='form-control mb-4' type="text" name='email' id='email' placeholder='Type your email...' onChange={handleEmailChange}/>
         <label htmlFor="password">Password</label>
-        <input className='form-control mb-4' type="text" name='password' autocomplete="off" id='password' placeholder='Type your password...' onChange={handlePasswordChange}/>
+        <input className='form-control mb-4' type="password" name='password' autoComplete="off" id='password' placeholder='Type your password...' onChange={handlePasswordChange}/>
         <div className='text-center mt-5'><input className='btn btn-outline-dark signinbtn' type="submit" value='Sign In'/></div>
       </form>
       </div>

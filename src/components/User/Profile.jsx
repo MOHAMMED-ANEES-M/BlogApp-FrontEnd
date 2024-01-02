@@ -4,49 +4,26 @@ import { Link, useNavigate } from 'react-router-dom'
 
 const Contact = () => {
 
-  // const [fetchedData,setfetchedData] = useState([''])
   const [profile,setProfile] = useState([])
   const [username,setUsername] = useState('')
   const navigate = useNavigate()
 
-
-  const loggedInUsername = localStorage.getItem('loggedInUsername');
   const UserId = localStorage.getItem('userId')
   let token = localStorage.getItem('token')
+
     useEffect(()=>{
 
-      const fetchedusername = loggedInUsername;
       const fetchedUserId = UserId;
 
       console.log(fetchedUserId,'UserId');
 
-      let fetchUsername=async ()=>{
-     
-        try{
-        
-          if(!token){
-            navigate('/signup')
-          }
-          
-          // let finded=await axios.get('http://localhost:5000/find',{
-          //   headers: {
-          //     Authorization: token
-          //   }
-          // })
-          // setfetchedData(finded.data)
-          // console.log(finded.data,'newdata');
-
-          console.log(fetchedusername,'fetchedUser');
-          setUsername(fetchedusername)
-
-        } catch(error){
-          console.error('Error fetching data:', error);
-        }
-        }
-        fetchUsername()
-
         let fetchProfile= async ()=>{
           try{
+
+            if (!token) {
+              navigate('/signin')
+            }
+
             let findedProfile = await axios.get('http://localhost:5000/findProfile', {
               headers: {
                 Authorization: token
@@ -55,8 +32,9 @@ const Contact = () => {
                 id: fetchedUserId,
               },
             })
-            console.log('id',);
             setProfile(findedProfile.data)
+            setUsername(findedProfile.data.username)
+            console.log(findedProfile.data.username,'username');
             console.log(findedProfile.data,'profile');
           }catch(err){
             console.error('Error fetching data:', err)
@@ -64,25 +42,14 @@ const Contact = () => {
         }
         fetchProfile()
 
-      },[])
+      },[UserId,token,navigate])
   return (
     <div className='maindiv text-black  '>
 
-      <h1>Welcome: {username}</h1>
-    {/* <div>
-    
-      <h2 className='text-center mb-5 '>List</h2>
-        {fetchedData.map((item)=>(
-          <div className=' rounded-3 p-3 mt-3 list'>
-          <p>State: {item?.email}</p>
-          <p>Username: {item?.username}</p>
-          <p>Password: {item?.password}</p> 
-    </div>
-    ))}
-    </div> */}
+      <h3 className='text-center mb-5'>Welcome: {username}</h3>
 
     <div>
-      <h2 className='text-center mb-5 text-black '>Profile Details</h2>
+      <h4 className='text-center mb-5 text-black '>Profile Details</h4>
       
         <div className='text-black w-25 m-auto border p-3'>
           <div>
@@ -93,7 +60,7 @@ const Contact = () => {
           <p>Country: {profile.country}</p>
           </div>
           <div className='text-center '>
-        <Link to={`/updateprofile/${profile._id}`}><button className='btn btn-outline-dark'>Update</button></Link>
+        <Link to={`/updateprofile/${profile._id}`}><button className='btn btn-outline-dark'>Edit</button></Link>
         </div>
         </div>
     </div>

@@ -9,3 +9,9 @@
 .navbtn{
   margin-right: 2rem;
 }
+
+@media screen and (max-width: 990) {
+  .navlistdiv {
+      display: block;
+    }
+}

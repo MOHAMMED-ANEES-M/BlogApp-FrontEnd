@@ -1,0 +1,10 @@
+.blogcard{
+    height: 245px;
+    overflow-y: hidden;
+}
+
+.linkadmin:hover{
+    text-decoration: none;
+    color: black;
+}
+

@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import './UpdateProfile.css';
+
 
 const UpdateProfile = () => {
 
@@ -15,12 +17,18 @@ const UpdateProfile = () => {
 
     let handleSubmit=async (e)=>{
         e.preventDefault()
-        let response=await axios.put(`http://localhost:5000/update/${id}`,data)
-        console.log(response);
-        alert('Details updated')
-        navigate('/profile')
-    }
 
+        try{
+
+          let response=await axios.put(`http://localhost:5000/update/${id}`,data)
+          console.log(response);
+          alert('Details updated')
+          navigate('/profile')
+        }catch(err){
+          console.log(err.message);
+          alert(err.message)
+        }
+    }
 
   return (
     <div>
@@ -30,6 +38,7 @@ const UpdateProfile = () => {
           <div>
             <form onSubmit={handleSubmit}>
           <input className='form-control mb-4' type="text" placeholder='username' name='username' onChange={handleChange}/>
+          <input className='form-control mb-4' type="text" placeholder='email' name='email' onChange={handleChange}/>
           <input className='form-control mb-4' type="text" placeholder='name' name='name' onChange={handleChange}/>
           <textarea className='form-control mb-4' type="text" placeholder='bio' name='bio' onChange={handleChange}/>
           <input className='form-control mb-4' type="Number" placeholder='number' name='number' onChange={handleChange}/>
