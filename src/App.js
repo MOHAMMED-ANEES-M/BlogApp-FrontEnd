@@ -1,6 +1,6 @@
 import { Nav, Navbar } from 'react-bootstrap';
 import './App.css';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink,Link, Outlet, useNavigate } from 'react-router-dom';
 
 function App() {
 
@@ -8,6 +8,7 @@ function App() {
 
   let token = localStorage.getItem('token')
   let loggedInUsername = localStorage.getItem('loggedInUsername')
+  let userId = localStorage.getItem('userId')
 console.log(loggedInUsername,'idapp');
 
   let handleLogout=()=>{
@@ -21,7 +22,7 @@ console.log(loggedInUsername,'idapp');
   return (
     
     <div className="App">
-    { loggedInUsername==='admin' ? (
+    { userId==='6593aae9ddf3c661e6904f31' ? (
       <div>
       <Navbar collapseOnSelect expand="lg" className='bg-light '>
   <Navbar.Brand className='logo'><div className='logo1'>Memoir.</div></Navbar.Brand>
@@ -30,10 +31,10 @@ console.log(loggedInUsername,'idapp');
     <Nav className="mr-auto">
 
       
-         <Nav.Link as={Link} to='/homeadmin'><div className='navlink1'>Home</div></Nav.Link>
-         <Nav.Link as={Link} to='/write'><div className='navlink1'>Write</div></Nav.Link>
-         <Nav.Link as={Link} to='/profileadmin'><div className='navlink1'>Profile</div></Nav.Link>
-         <Nav.Link as={Link} to='/about'><div className='navlink1'>About</div></Nav.Link>
+         <Nav.Link as={NavLink} to='/homeadmin' className='navlink1 rounded ps-2 pe-5 '><div className='text-black '>Home</div></Nav.Link>
+         <Nav.Link as={NavLink} to='/write' className='navlink1 rounded ps-2 pe-5 '><div className='text-black '>Write</div></Nav.Link>
+         <Nav.Link as={NavLink} to='/profileadmin' className='navlink1 rounded ps-2 pe-5 '><div className='text-black '>Profile</div></Nav.Link>
+         <Nav.Link as={NavLink} to='/about' className='navlink1 rounded ps-2 pe-5 '><div className='text-black '>About</div></Nav.Link>
      
       
     </Nav>
@@ -66,10 +67,10 @@ console.log(loggedInUsername,'idapp');
       <Nav className="mr-auto">
   
         
-           <Nav.Link as={Link} to='/'><div className='navlink1'>Home</div></Nav.Link>
-           <Nav.Link as={Link} to='/write'><div className='navlink1'>Write</div></Nav.Link>
-           <Nav.Link as={Link} to='/profile'><div className='navlink1'>Profile</div></Nav.Link>
-           <Nav.Link as={Link} to='/about'><div className='navlink1'>About</div></Nav.Link>
+           <Nav.Link as={NavLink} to='/' className='navlink1 rounded ps-2 pe-5'><div className='text-black '>Home</div></Nav.Link>
+           <Nav.Link as={NavLink} to='/write' className='navlink1 rounded ps-2 pe-5 '><div className='text-black '>Write</div></Nav.Link>
+           <Nav.Link as={NavLink} to='/profile' className='navlink1 rounded ps-2 pe-5 '><div className='text-black '>Profile</div></Nav.Link>
+           <Nav.Link as={NavLink} to='/about' className='navlink1 rounded ps-2 pe-5 '><div className='text-black '>About</div></Nav.Link>
        
         
       </Nav>

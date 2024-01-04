@@ -58,6 +58,7 @@ const ProfileAdmin = () => {
           <div>
           <p>Name: {profile.name}</p>
           <p>Bio: {profile.bio}</p>
+          <p>Number: {profile.number}</p>
           <p>Email: {profile.email}</p>
           <p>State: {profile.state}</p>
           <p>Country: {profile.country}</p>

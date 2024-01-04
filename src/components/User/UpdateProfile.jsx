@@ -25,8 +25,8 @@ const UpdateProfile = () => {
           alert('Details updated')
           navigate('/profile')
         }catch(err){
-          console.log(err.message);
-          alert(err.message)
+          console.log(err.response.data.message);
+          alert(err.response.data.message);
         }
     }
 

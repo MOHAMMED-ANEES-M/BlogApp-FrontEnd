@@ -5,7 +5,12 @@
 }
 .navlink1{
   margin-right: 5rem;
+  color: black;
 }
+nav a.active{
+font-weight: bold;
+}
+
 .navbtn{
   margin-right: 2rem;
 }
